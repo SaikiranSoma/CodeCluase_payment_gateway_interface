@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My E-commerce Store</title>
+	<link rel="stylesheet" href="/docs/style.css">
+	<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+</head>
+<body>
+	<header>
+		<h1>My E-commerce Store</h1>
+	</header>
+	<main>
+		<section class="product">
+			<h2> Apple air tag</h2>
+<img src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/airtag-witb-202104_FMT_WHH?wid=452&amp;hei=452&amp;fmt=jpeg&amp;qlt=90&amp;.v=1618423108000" alt="AirTag Image">
+			<p> Air tag helps you to find your keys/bags easily</p>
+			<p>Price: Rs. 1000</p>
+			<button id="buyButton" onClick="razorpay()">Buy Now</button>
+		</section>
+	</main>
+
+	<script>
+		var options = {
+		    "key": "rzp_test_GVQuV0aanrVKLd",
+		    "amount": "100000", // 1000 rupees
+		    "currency": "INR",
+		    "name": "My E-commerce Store",
+		    "description": "Purchase of Product",
+		    "image": "logo.jpg",
+            "handler": function (response){
+            if(response.razorpay_payment_id) {
+                alert("Payment successful");
+            } else {
+                alert("Payment failed, please try again later");
+            }
+        },
+		    "prefill": {
+		        "name": "Customer Name",
+		        "email": "customer@example.com",
+		        "contact": "9999999999"
+		    },
+		    "notes": {
+		        "address": "Customer Address"
+		    },
+		    "theme": {
+		        "color": "#6182fa"
+		    }
+		};
+
+		function razorpay() {
+			var rzp1 = new Razorpay(options);
+			rzp1.open();
+			event.preventDefault();
+		}
+	</script>
+</body>
+</html>
